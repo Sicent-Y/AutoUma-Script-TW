@@ -86,7 +86,7 @@ adb shell wm density reset
 
 同样，你可能会出现屏幕无法点击的问题，如下命令可能可以帮助你
 ```
-点击屏幕(X,Y)像素处: adb shell input tap X Y
-在T秒内滑动屏幕,从(X1,Y1)到(X2,Y2): adb shell input swipe X1 Y1 X2 Y2 T
-唤起菜单/切后台: adb shell input keyevent 82
+adb shell input tap X Y   点击屏幕(X,Y)像素处 
+adb shell input swipe X1 Y1 X2 Y2 T   在T秒内滑动屏幕,从(X1,Y1)到(X2,Y2)
+adb shell input keyevent 82   唤起菜单/切后台
 ```
