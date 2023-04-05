@@ -34,7 +34,7 @@
 git clone https://github.com/Sicent-Y/AutoUma_tw_Script
 ```
 
-运行完成后，会在你的目录下创建一个AutoUma_tw_Script文件夹
+运行完成后，会在你的目录下创建一个AutoUma_tw_Script文件夹，该文件夹即项目文件夹
 
 #### 创建python虚拟环境
 
@@ -58,9 +58,12 @@ pip install -r requiremnets.txt
 这可能需要一些时间，你可以使用国内镜像源，这样会快一些`pip install -r requiremnets.txt -i https://pypi.tuna.tsinghua.edu.cn/simple`
 
 ### 配置adb连接
-该仓库自带有adb工具包，无需额外手动安装
+*该仓库自带有adb工具包，无需额外手动安装。当然你也可以根据网络教程手动安装adb并设置系统变量*
 #### 手机adb设置
 打开开发者选项
 
+进入`设置->开发者选项`，找到`USB调试`或`ADB设置`，该部分不同手机并不完全相同，请自行完成操作，允许你的电脑使用adb操作你的手机；或者自行搜索网络教程
 
+  - 注:可以进行无线adb连接，具体连接方法可以自行搜索网络教程
 
+在项目文件夹下打开cmd，可以通过`adb devices`确认是否连接成功
