@@ -16,7 +16,12 @@
 - 每一回合会根据获取的信息，按照一定的算法，计算各项操作的权重，最后选取权重最高者执行(休息、外出、保健室、五种训练、比赛)
   具体算法如下：
   ```
-  (max(((100+(((Speed.Aim[catg]-Speed.Aim[catg-1])/stepLen)*(stage-sStage)))-Speed.Value),0))*Speed.Add*0.0013 + 0.06*(Speed.Add-9) + 0.15*Speed.Be3 + 0.3*Speed.Be4 - int(Speed.Aim[catg+1]<Speed.Value)*0.7 - max((Speed.Value-Speed.Aim[catg]),0)*0.005
-  weight + 0.06*(Stamina.Add-9) + 0.15*Stamina.Be3 + 0.3*Stamina.Be4 - int(Stamina.Aim[catg]<Stamina.Value)*0.42 - int(Stamina.Aim[catg+1]<Stamina.Value)*1
+  Speed:
+  return (max(((100+(((Speed.Aim[catg]-Speed.Aim[catg-1])/stepLen)*(stage-sStage)))-Speed.Value),0))*Speed.Add*0.0013 + 0.06*(Speed.Add-9) + 0.15*Speed.Be3 + 0.3*Speed.Be4 - int(Speed.Aim[catg+1]<Speed.Value)*0.7 - max((Speed.Value-Speed.Aim[catg]),0)*0.005
+  
+  Stamina: 
+  for check in range(1,catg+1):
+    weight += int(Stamina.Aim[check]>Stamina.Value)*Stamina.Add*0.025
+  return weight + 0.06*(Stamina.Add-9) + 0.15*Stamina.Be3 + 0.3*Stamina.Be4 - int(Stamina.Aim[catg]<Stamina.Value)*0.42 - int(Stamina.Aim[catg+1]<Stamina.Value)*1
 
   ```
