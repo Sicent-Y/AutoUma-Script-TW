@@ -29,7 +29,7 @@
 ### 安装脚本运行环境
 #### 克隆GitHub仓库
 
-在你的目录下打开cmd，输入如下内容克隆仓库
+在你的目录下打开cmd，输入如下内容克隆仓库*[注:是在指定目录下打开cmd，操作方法请自己搜索]*
 ```
 git clone https://github.com/Sicent-Y/AutoUma_tw_Script
 ```
@@ -59,6 +59,8 @@ pip install -r requiremnets.txt
 
 ### 配置adb连接
 *该仓库自带有adb工具包，无需额外手动安装。当然你也可以根据网络教程手动安装adb并设置系统变量*
+#### 连接
+使用数据线连接你的手机与电脑，确保你的数据线与接口能够传输数据，过于低级的数据线可能只能充电而无法起到连接手机电脑的作用
 #### 手机adb设置
 打开开发者选项
 
@@ -69,9 +71,14 @@ pip install -r requiremnets.txt
 在项目文件夹下打开cmd，可以通过`adb devices`确认是否连接成功
 
 #### 设置分辨率
-该脚本只能在指定的分辨率下运行，需要将分辨率设置为1080x2400，density为420
+该脚本只能在指定的分辨率下运行，需要将分辨率设置为1080x2400，density为420，在项目文件夹下打开cmd
 ```
 adb shell wm size 1080x2400
 adb shell wm density 420
 ```
 
+设置完成后，你的手机屏幕可能会变得有点抽象，可以通过如下命令重置屏幕
+```
+adb shell wm size reset
+adb shell wm density reset
+```
