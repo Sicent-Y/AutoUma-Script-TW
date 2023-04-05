@@ -30,7 +30,7 @@
 ### 安装脚本运行环境
 #### 克隆GitHub仓库
 
-在你的目录下打开cmd，输入如下内容克隆仓库*\[注:是在指定目录下打开cmd，操作方法请自己搜索\]*
+在你的目录下打开cmd，输入如下内容克隆仓库 *注:是在指定目录下打开cmd，操作方法请自己搜索*
 ```
 git clone https://github.com/Sicent-Y/AutoUma_tw_Script
 ```
@@ -61,7 +61,7 @@ pip install -r requiremnets.txt
 ### 配置adb连接
 *该仓库自带有adb工具包，无需额外手动安装。当然你也可以根据网络教程手动安装adb并设置系统变量*
 #### 连接
-使用数据线连接你的手机与电脑，确保你的数据线与接口能够传输数据，过于低级的数据线可能只能充电而无法起到连接手机电脑的作用
+使用数据线连接你的手机与电脑，确保你的数据线与接口能够传输数据；过于低级的数据线可能只能充电而无法起到连接手机电脑的作用
 #### 手机adb设置
 打开开发者选项
 
@@ -82,4 +82,11 @@ adb shell wm density 420
 ```
 adb shell wm size reset
 adb shell wm density reset
+```
+
+同样，你可能会出现屏幕无法点击的问题，如下命令可能可以帮助你
+```
+点击屏幕(X,Y)像素处: adb shell input tap X Y
+在T秒内滑动屏幕,从(X1,Y1)到(X2,Y2): adb shell input swipe X1 Y1 X2 Y2 T
+唤起菜单/切后台: adb shell input keyevent 82
 ```
