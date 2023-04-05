@@ -27,7 +27,7 @@
 > 正确的网络连接
 
 ### 安装脚本运行环境
-##### 克隆GitHub仓库
+#### 克隆GitHub仓库
 
 在你的目录下打开cmd，输入如下内容克隆仓库
 ```
@@ -36,7 +36,7 @@ git clone https://github.com/Sicent-Y/AutoUma_tw_Script
 
 运行完成后，会在你的目录下创建一个AutoUma_tw_Script文件夹
 
-##### 创建python虚拟环境
+#### 创建python虚拟环境
 
 进入AutoUma_tw_Script文件夹，在该目录下重新打开cmd；或者你也可以不关闭刚才打开的cmd窗口，输入`cd AutoUma_tw_Script`进入AutoUma_tw_Script目录
 
