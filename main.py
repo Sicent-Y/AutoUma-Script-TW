@@ -163,6 +163,7 @@ class TimeOut():
                 CapON = False
                 threadingCap.join()
                 threadingDispatch.join()
+
                 break
         #raise TimeoutError("Unkown Errors: Interrupt")
     threadingChecker = threading.Thread(target=Checker)
@@ -876,6 +877,9 @@ class Gap():
         Gap.Complete = False
         threadingGap.start()
         Dispatch.insert(0,'Gap.ComfirIn')
+        if not CapON:
+            Gap.Complete = True
+            return False
         threadingGap.join()
         Gap.Complete = False
 
@@ -1211,6 +1215,9 @@ class Home():
         Home.Complete = False
         threadingHome.start()
         Dispatch.insert(0,'Home.JudgeRace')
+        if not CapON:
+            Home.Complete = True
+            return False
         threadingHome.join()
         Home.Complete = False
 
@@ -1343,6 +1350,9 @@ class SummerHome():
         print(time.strftime("%m-%d %H:%M:%S",time.localtime())+"[夏季合宿]")
         TimeOut.Latest = time.time()
         Dispatch.append('SummerHome.JudgeState')
+        if not CapON:
+            SummerHome.Complete = True
+            return False
         threadingSummerHome.join()
         SummerHome.Complete = False
 
@@ -1478,6 +1488,9 @@ class RaceHome():
         if stage in range(0,60):
             RaceHome.Skill()
         RaceHome.Race()
+        if not CapON:
+            RaceHome.Complete = True
+            return False
         threadingRaceHome.join()
         RaceHome.Complete = False
 
@@ -1538,6 +1551,9 @@ class Train():
         Train.Complete = False
         threadingTrain.start()
         Dispatch.append('Train.Conduct'+which)
+        if not CapON:
+            Train.Complete = True
+            return False
         threadingTrain.join()
         Train.Complete = False
 
@@ -1597,6 +1613,9 @@ class Sleep():##需要兼容夏季合宿的休息按钮,兼具Ill执行权限
         else:
             Dispatch.append('Back')
             Dispatch.insert(0,'Sleep.TapIll')
+        if not CapON:
+            Sleep.Complete = True
+            return False
         threadingSleep.join()
         Sleep.Complete = False
 
@@ -1654,6 +1673,9 @@ class HangOut():##夏季合宿不执行HangOut操作,合并到Sleep中
         threadingHangOut.start()
         Dispatch.append('Back')
         Dispatch.insert(0,'HangOut.TapHangOut')
+        if not CapON:
+            HangOut.Complete = True
+            return False
         threadingHangOut.join()
         HangOut.Complete = False
 
@@ -1809,6 +1831,9 @@ class Race():##需要根据stage判断是否获取技能,并主动前往获取�
         if stage in UR.values() and stage in range(0,60):
             Race.Skill()
         Race.Race()
+        if not CapON:
+            Race.Complete = True
+            return False
         threadingRace.join()
         Race.Complete = False
 
@@ -1909,6 +1934,9 @@ if __name__ == '__main__':
                 Sleep.main(SummerHome.Next)
 
         stage += 1
+        if not CapON:
+            raise TimeoutError('Unknown Errors')
+        
         
     Finish.main()
     ##养成结束
