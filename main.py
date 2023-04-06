@@ -161,9 +161,7 @@ class TimeOut():
                 print(time.strftime("%m-%d %H:%M:%S",time.localtime())+"[出现未知错误,程序长时间未响应]")
                 TimeOut.Latest = time.time()
                 CapON = False
-                threadingCap.join()
-                threadingDispatch.join()
-
+                Gap.Complete, Home.Complete, SummerHome.Complete, RaceHome.Complete, Train.Complete, Sleep.Complete, HangOut.Complete, Race.Complete = True, True, True, True, True, True, True, True
                 break
         #raise TimeoutError("Unkown Errors: Interrupt")
     threadingChecker = threading.Thread(target=Checker)
@@ -1894,6 +1892,13 @@ if __name__ == '__main__':
         #回合间隙
         Gap.main()
 
+        if Gap.Next=='Retry':
+            Dispatch.append('Race.ViewResult')
+            while not Race.Complete:
+                time.sleep(0.1)
+            Race.Complete = False
+            continue
+        
         #标定体力条位置
         EnergyLoc = itemTell(Cap, i.Item.EnergyLoc)['1'][1]
 
@@ -1907,13 +1912,7 @@ if __name__ == '__main__':
         elif Gap.Next=='SummerHome':
             Last = 'SummerHome'
             SummerHome.main()
-        elif Gap.Next=='Retry':
-            Last = 'Gap'
-            Dispatch.append('Race.ViewResult')
-            while not Race.Complete:
-                time.sleep(0.1)
-            Race.Complete = False
-            continue
+        
         
         #判断Home后的步骤
         if Last=='Home':
