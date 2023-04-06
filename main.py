@@ -164,7 +164,7 @@ class TimeOut():
                 threadingCap.join()
                 threadingDispatch.join()
                 break
-        raise TimeoutError("Unkown Errors: Interrupt")
+        #raise TimeoutError("Unkown Errors: Interrupt")
     threadingChecker = threading.Thread(target=Checker)
 
 #配置文件
@@ -875,7 +875,7 @@ class Gap():
         threadingGap = threading.Thread(target=pageCap.gap)
         Gap.Complete = False
         threadingGap.start()
-        Dispatch.append('Gap.ComfirIn')
+        Dispatch.insert(0,'Gap.ComfirIn')
         threadingGap.join()
         Gap.Complete = False
 
@@ -1862,15 +1862,15 @@ if __name__ == '__main__':
         Activate.main()
         stage += 1
 
-    #标定体力条位置
-    if stage in range(1,78):
-        EnergyLoc = itemTell(Cap, i.Item.EnergyLoc)['1'][1]
-
     ##养成回合,循环
     while stage<=78:
         time.sleep(0.1)
+
         #回合间隙
         Gap.main()
+
+        #标定体力条位置
+        EnergyLoc = itemTell(Cap, i.Item.EnergyLoc)['1'][1]
 
         #判断Gap后的步骤
         if Gap.Next=='Home':
@@ -1885,8 +1885,11 @@ if __name__ == '__main__':
         elif Gap.Next=='Retry':
             Last = 'Gap'
             Dispatch.append('Race.ViewResult')
+            while not Race.Complete:
+                time.sleep(0.1)
+            Race.Complete = False
             continue
-
+        
         #判断Home后的步骤
         if Last=='Home':
             if Home.Next in ('Speed','Stamina','Power','Will','Intell'):
