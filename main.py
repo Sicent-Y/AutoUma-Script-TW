@@ -469,8 +469,13 @@ class pageCap():
             if itemTell(Cap, i.Item.Waite)['count']==1:
                 Page = 'Connecting'
             elif itemTell(Cap, i.Item.TrainTitle)['count']==5:
+                #可能是主界面、夏季合宿主界面、训练界面、档期比赛主界面
                 if itemTell(Cap, i.Item.MainSleep)['count']==1:
                     Page = 'Home'
+                elif itemTell(Cap, i.Item.RMSkill)['count']==1:
+                    Page = 'RaceHome'
+                elif itemTell(Cap, i.Item.SMSleep)['count']==1:
+                    Page = 'SummerHome'
                 else:
                     Page = 'Train'
             elif itemTell(Cap, i.Item.SkillLab)['count']==1:
@@ -486,8 +491,13 @@ class pageCap():
             if itemTell(Cap, i.Item.Waite)['count']==1:
                 Page = 'Connecting'
             elif itemTell(Cap, i.Item.TrainTitle)['count']==5:
+                #可能是主界面、夏季合宿主界面、训练界面、档期比赛主界面
                 if itemTell(Cap, i.Item.MainSleep)['count']==1:
                     Page = 'Home'
+                elif itemTell(Cap, i.Item.RMSkill)['count']==1:
+                    Page = 'RaceHome'
+                elif itemTell(Cap, i.Item.SMSleep)['count']==1:
+                    Page = 'SummerHome'
                 else:
                     Page = 'Train'
             elif itemTell(Cap, i.Item.SkillLab)['count']==1:
@@ -525,8 +535,13 @@ class pageCap():
             if itemTell(Cap, i.Item.Waite)['count']==1:
                 Page = 'Connecting'
             elif itemTell(Cap, i.Item.TrainTitle)['count']==5:
+                #可能是主界面、夏季合宿主界面、训练界面、档期比赛主界面
                 if itemTell(Cap, i.Item.MainSleep)['count']==1:
                     Page = 'Home'
+                elif itemTell(Cap, i.Item.RMSkill)['count']==1:
+                    Page = 'RaceHome'
+                elif itemTell(Cap, i.Item.SMSleep)['count']==1:
+                    Page = 'SummerHome'
                 else:
                     Page = 'Train'
             elif itemTell(Cap, i.Item.SkillLab)['count']==1:
@@ -1783,7 +1798,14 @@ class Race():##需要根据stage判断是否获取技能,并主动前往获取�
         else:
             return False
     def SelectRace():##选择比赛并点击参赛,对接SelectRaceComfirWindow函数,导向确认窗口
-        if clickItem(i.Item.ToRace[str(stage)]):
+        if stage not in UR.values() and stage not in SSR.values():
+            print(time.strftime("%m-%d %H:%M:%S",time.localtime())+"[计划外比赛,进行默认比赛]")
+            TimeOut.Latest = time.time()
+            clickItem(i.Item.GoRaceButton)
+            Race.Swipe = 0
+            Dispatch.append('Race.AfterSelectRaceWindow')
+            return True
+        elif clickItem(i.Item.ToRace[str(stage)]):
             print(time.strftime("%m-%d %H:%M:%S",time.localtime())+"[选择到对应比赛]")
             TimeOut.Latest = time.time()
             clickItem(i.Item.GoRaceButton)
