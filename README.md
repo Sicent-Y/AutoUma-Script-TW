@@ -1,4 +1,4 @@
-# AutoUma_tw_Script
+# AutoUma-Script-TW
 赛马娘凹种马根本不是人干的事，由于没有找到免费的、手机版、繁中服的自动化脚本，遂自己动手编写了一个超级简陋的。
 
 # 功能
@@ -32,14 +32,14 @@
 
 在你的目录下打开cmd，输入如下内容克隆仓库 *注:是在指定目录下打开cmd，操作方法请自己搜索*
 ```
-git clone https://github.com/Sicent-Y/AutoUma_tw_Script
+git clone https://github.com/Sicent-Y/AutoUma-Script-TW
 ```
 
-运行完成后，会在你的目录下创建一个AutoUma_tw_Script文件夹，该文件夹即项目文件夹
+运行完成后，会在你的目录下创建一个AutoUma-Script-TW文件夹，该文件夹即项目文件夹
 
 #### 创建python虚拟环境
 
-进入AutoUma_tw_Script文件夹，在该目录下重新打开cmd；或者你也可以不关闭刚才打开的cmd窗口，输入`cd AutoUma_tw_Script`进入AutoUma_tw_Script目录
+进入AutoUma-Script-TW文件夹，在该目录下重新打开cmd；或者你也可以不关闭刚才打开的cmd窗口，输入`cd AutoUma-Script-TW`进入AutoUma-Script-TW目录
 
 输入如下代码创建虚拟环境
 ```
@@ -90,3 +90,20 @@ adb shell input tap X Y   点击屏幕(X,Y)像素处
 adb shell input swipe X1 Y1 X2 Y2 T   在T秒内滑动屏幕,从(X1,Y1)到(X2,Y2)
 adb shell input keyevent 82   唤起菜单/切后台
 ```
+
+# 使用方法
+在AutoUma-Script-TW文件夹根目录下打开cmd，进入你创建的虚拟环境
+```
+.\AutoUma\Scripts\activate.bat
+```
+
+确认adb连接正常、且手机界面位于指定位置后，输入以下命令，即可执行脚本
+```
+python main.py
+```
+### 脚本适用范围与指定页面
+请在输入上述命令开始执行脚本前，确保你的手机已经打卡了赛马娘，并确保你的屏幕处在如下界面
+
+![ActivatePos](/README/ActivatePos.jpg)
+
+脚本运行后会
