@@ -130,7 +130,7 @@ python main.py
 
 请在输入上述命令开始执行脚本前，确保你的手机已经打开了赛马娘，并使你的屏幕处在如下界面
 
-![ActivatePos](https://i.postimg.cc/76gBrcLC/Activate-Pos.jpg)
+![ActivatePos]()
 
 脚本运行后，会自动点击`开始培育！`，随后进入育成页面。
 
