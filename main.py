@@ -12,7 +12,7 @@ import item as i
 #设备名称
 IP = 'auto'
 #培育马娘
-Who = 'Defult'
+Who = 'Skii'
 #设置当前回合数
 if len(sys.argv) <= 1:
     stage = 0
