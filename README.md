@@ -78,7 +78,7 @@ adb shell wm size 1080x2400
 adb shell wm density 420
 ```
 
-设置完成后，你的手机屏幕可能会变得有点抽象，不必担心,你可以在脚本使用完成后，通过如下命令重置屏幕
+设置完成后，你的手机屏幕可能会变得有点抽象，不必担心，你可以在脚本使用完成后，通过如下命令重置屏幕
 ```
 adb shell wm size reset
 adb shell wm density reset
