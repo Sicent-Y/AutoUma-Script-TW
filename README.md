@@ -93,6 +93,7 @@ pip install -r requiremnets.txt
 在项目文件夹下打开cmd，可以通过`adb devices`确认是否连接成功
 
 #### 设置分辨率
+
 该脚本只能在指定的分辨率下运行，需要将分辨率设置为1080x2400，density为420，在项目文件夹下打开cmd
 ```
 adb shell wm size 1080x2400
@@ -113,6 +114,7 @@ adb shell input keyevent 82   唤起菜单/切后台
 ```
 
 # 使用方法
+
 在AutoUma-Script-TW文件夹根目录下打开cmd，进入你创建的虚拟环境
 ```
 .\AutoUma\Scripts\activate.bat
@@ -122,7 +124,9 @@ adb shell input keyevent 82   唤起菜单/切后台
 ```
 python main.py
 ```
+
 ### 脚本适用范围与指定页面
+
 请在输入上述命令开始执行脚本前，确保你的手机已经打开了赛马娘，并使你的屏幕处在如下界面
 
 ![ActivatePos](https://i.postimg.cc/76gBrcLC/Activate-Pos.jpg)
@@ -138,3 +142,6 @@ python main.py
 ![NOTActivatePos](https://i.postimg.cc/NFdkgwv0/NOTActivate-Pos.jpg)
 
 **注：**脚本目前仅支持URA剧本的育成，并且单次执行只能进行一次育成，不能够连续多次执行(因为需要人工选择种马与支援卡)；脚本将会停在结束确认的界面，请手动前往获取技能
+
+### 自定义参数与适应性调整
+
