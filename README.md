@@ -130,17 +130,17 @@ python main.py
 
 请在输入上述命令开始执行脚本前，确保你的手机已经打开了赛马娘，并使你的屏幕处在如下界面
 
-![ActivatePos](https://img1.imgtp.com/2023/04/10/msbDBj5C.jpg)
+![ActivatePos](https://img1.imgtp.com/2023/04/10/msbDBj5C.jpg =360x800)
 
 脚本运行后，会自动点击`开始培育！`，随后进入育成页面。
 
 接下来脚本将会持续运行，直到育成结束，抵达如下界面，抵达此界面后脚本将自动关闭，运行结束，并使手机熄屏
 
-![CompletePos](https://img1.imgtp.com/2023/04/10/1OGeY49p.jpg)
+![CompletePos](https://img1.imgtp.com/2023/04/10/1OGeY49p.jpg =360x800)
 
 **注：** 启动脚本时，请确保你的体力充足，防止出现如下界面；如果你希望使用双倍体力，请自己勾上双倍选项后再启动脚本，并确保体力足够
 
-![NOTActivatePos](https://img1.imgtp.com/2023/04/10/cKNkUG29.jpg)
+![NOTActivatePos](https://img1.imgtp.com/2023/04/10/cKNkUG29.jpg =360x800)
 
 **注：** 脚本目前仅支持URA剧本的育成，并且单次执行只能进行一次育成，不能够连续多次执行(因为需要人工选择种马与支援卡)；脚本将会停在结束确认的界面，请手动前往获取技能
 
