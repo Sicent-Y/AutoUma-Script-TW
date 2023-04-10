@@ -104,6 +104,6 @@ python main.py
 ### 脚本适用范围与指定页面
 请在输入上述命令开始执行脚本前，确保你的手机已经打卡了赛马娘，并确保你的屏幕处在如下界面
 
-![ActivatePos](https://i.postimg.cc/dqfgrcP9/Activate-Pos.jpg)
+![ActivatePos](https://i.postimg.cc/76gBrcLC/Activate-Pos.jpg)
 
 脚本运行后会
