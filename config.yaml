@@ -1,8 +1,9 @@
 Device: auto
 
 DevicesList:
-  - 415e0402
-  - FA6XPB5D5LJVWCYX
+  - ToMemoryYourDevices
+  - TheSecondDevices
+  - AsStorageHistoryDevices
 
 DataPath: source/data/
 
