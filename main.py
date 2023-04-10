@@ -12,7 +12,7 @@ import item as i
 #设备名称
 IP = 'auto'
 #培育马娘
-Who = 'Skii'
+Who = 'Defult'
 #设置当前回合数
 if len(sys.argv) <= 1:
     stage = 0
@@ -167,19 +167,21 @@ class TimeOut():
     threadingChecker = threading.Thread(target=Checker)
 
 #配置文件
-def Config(Who:str):
-    global UR, SSR, SR, data, IP
+def Config():
+    global UR, SSR, SR, data, IP, Who
     with open("config.yaml","rb") as data:
-        config = yaml.load(data.read(), Loader=yaml.FullLoader)[Who]
-    UR = config['ImportantRace']
-    SSR = config['ValidRace']
-    SR = config['CommonRace']
-    Speed.Aim = list(config['Speed'].values())
-    Stamina.Aim = list(config['Stamina'].values())
-    Power.Aim = list(config['Power'].values())
-    Will.Aim = list(config['Will'].values())
-    Intell.Aim = list(config['Intell'].values())
+        config = yaml.load(data.read(), Loader=yaml.FullLoader)
+    Who = config['Who']
+    UR = config[Who]['ImportantRace']
+    SSR = config[Who]['ValidRace']
+    SR = config[Who]['CommonRace']
+    Speed.Aim = list(config[Who]['Speed'].values())
+    Stamina.Aim = list(config[Who]['Stamina'].values())
+    Power.Aim = list(config[Who]['Power'].values())
+    Will.Aim = list(config[Who]['Will'].values())
+    Intell.Aim = list(config[Who]['Intell'].values())
     data = config['DataPath']
+    IP = config['Device']
 
 #连接到adb设备
 def adbConnect(ip):
@@ -220,7 +222,7 @@ def adbConnect(ip):
         raise TypeError("Devices Illegal.")
 
 #初始化
-Config(Who)
+Config()
 adbConnect(IP) 
 
 
@@ -784,7 +786,8 @@ class Gap():
     #监控该step是否完成执行,一旦完成即阻断该step的页面类型监控
     Complete = False
     #检查进入新回合前是否出现过论外界面
-    Gapped = False
+    Gapped = 0
+    Comfirmed = 0
     #该step执行完成后应该执行的step
     Next = 'Home'
 
@@ -792,7 +795,7 @@ class Gap():
     def ComfirIn():
         global Dispatch, stage
         if Page=='Waite':
-            Gap.Gapped = True
+            Gap.Gapped += 1
             if clickItem(i.Item.ContinueButton):
                 print(time.strftime("%m-%d %H:%M:%S",time.localtime())+"[继续]")
                 TimeOut.Latest = time.time()
@@ -825,7 +828,11 @@ class Gap():
             Dispatch.append('Gap.EventSelect')
             return False
         elif Page=='Game':
+            print(time.strftime("%m-%d %H:%M:%S",time.localtime())+"[发生抓娃娃事件,该脚本不能识别目标,将进行随机抓取]")
+            TimeOut.Latest = time.time()
             Gap.Gapped = True
+            Dispatch.append('Gap.Game')
+            Dispatch.append('Gap.Game')
             Dispatch.append('Gap.Game')
             return False
         elif Page=='Heritage':
@@ -833,7 +840,6 @@ class Gap():
             Dispatch.append('Gap.Heritage')
             return False
         elif Page=='Train' or Page=='Skill':
-            Gap.Gapped = True
             Dispatch.append('Back')
             time.sleep(1)
             return False
@@ -842,8 +848,8 @@ class Gap():
             time.sleep(1)
             return False
         elif 'Home' in Page:
-            if Gap.Gapped:
-                Gap.Gapped = False
+            if Gap.Gapped>=2:
+                Gap.Gapped = 0
                 print("================== Round "+str(stage)+" ==================")
                 time.sleep(2)
                 Gap.Next = Page
@@ -852,8 +858,11 @@ class Gap():
                     Gap.Next = Page
                 Gap.Complete = True
                 return True
-            elif not Gap.Gapped:
-                print("!!!!!!!!!!!! NOT GAPPED !!!!!!!!!!!!")
+            elif Gap.Gapped<2:
+                time.sleep(0.5)
+                if Gap.Comfirmed > 3:
+                    Gap.Gapped = 2
+                Gap.Comfirmed += 1
                 return False
     def EventSelect():
         print(time.strftime("%m-%d %H:%M:%S",time.localtime())+"[发生事件:默认选择选项1]")
@@ -862,21 +871,17 @@ class Gap():
         time.sleep(1)
         return True
     def Game():
-        times = 0
-        print(time.strftime("%m-%d %H:%M:%S",time.localtime())+"[发生抓娃娃事件,该脚本不能识别目标,将进行随机抓取]")
-        TimeOut.Latest = time.time()
-        while times<3:
-            time.sleep(0.1)
-            if Page=='Game':
-                Game = (540,2250)
-                print(time.strftime("%m-%d %H:%M:%S",time.localtime())+"[第"+str(times+1)+"次抓取]")
-                TimeOut.Latest = time.time()
-                os.system("adb -s "+IP+" shell input swipe "+str(Game[0])+' '+str(Game[1])+' '+str(Game[0]+1)+' '+str(Game[1])+' '+str(random.randint(1000,3000)))
-                times += 1
-                time.sleep(0.3)
-            else:
-                time.sleep(0.3)
-        return True
+        time.sleep(0.1)
+        if Page=='Game':
+            Game = (540,2250)
+            print(time.strftime("%m-%d %H:%M:%S",time.localtime())+"[进行随机抓取...]")
+            TimeOut.Latest = time.time()
+            os.system("adb -s "+IP+" shell input swipe "+str(Game[0])+' '+str(Game[1])+' '+str(Game[0]+1)+' '+str(Game[1])+' '+str(random.randint(1000,3000)))
+            time.sleep(0.3)
+            return True
+        else:
+            time.sleep(0.3)
+            return False
     def Heritage():
         print(time.strftime("%m-%d %H:%M:%S",time.localtime())+"[因子继承]")
         TimeOut.Latest = time.time()
@@ -1340,7 +1345,7 @@ class SummerHome():
         Weight.Stamina += Stamina.Weigh() - int(Ill)*0.7 + 0.5
         Weight.Power += Power.Weigh() - int(Ill)*0.7 + 0.5
         Weight.Will += 0.06*(Will.Add-9) + 0.15*Will.Be3 + 0.3*Will.Be4 + min((Will.Aim[0]-Will.Value),0)*0.01 - int(Ill)*0.7 + 0.5
-        Weight.Intell += 0.06*(Intell.Add-9) + 0.15*Intell.Be3 + 0.3*Intell.Be4 + int(Intell.Add>21)*int(Energy>40)*max((95-Energy),0)*0.017*(min((Energy-39),25))*0.05 - int(Ill)*0.7 + 0.5
+        Weight.Intell += 0.06*(Intell.Add-9) + 0.15*Intell.Be3 + 0.3*Intell.Be4 + int(Intell.Add>21)*int(Energy>40)*max((95-Energy),0)*0.013*(min((Energy-39),25))*0.05 - int(Ill)*0.7 + 0.5
         Dispatch.append('SummerHome.WeightCompare')
         return True
     def WeightCompare():

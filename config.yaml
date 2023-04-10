@@ -1,10 +1,16 @@
+Device: auto
+
+DevicesList:
+  - 415e0402
+  - FA6XPB5D5LJVWCYX
+
+DataPath: source/data/
+
+Who: Skii
+
+
+
 Defult:
-  DataPath: source/data/
-
-  Device:
-    - 415e0402
-    - FA6XPB5D5LJVWCYX
-
   ImportantRace: {'24': 24, '29': 29, '31': 31, '34': 34, '45': 45, '54': 54, '70': 70}
   ValidRace: {'22': 22, '32': 32, '41': 41, '42': 42, '49': 49, '51': 51, '53': 53, '57': 57, '59': 59, '65': 65, '66': 66, '71': 71}
   CommonRace: {}
@@ -55,8 +61,6 @@ Defult:
 
 
 Skii:
-  DataPath: source/data/
-  
   ImportantRace: {'24': 24, '29': 29, '31': 31, '34': 34, '45': 45, '54': 54, '70': 70}
   ValidRace: {'22': 22, '32': 32, '41': 41, '42': 42, '49': 49, '51': 51, '53': 53, '57': 57, '59': 59, '65': 65, '66': 66, '71': 71}
   CommonRace: {}
@@ -106,8 +110,6 @@ Skii:
 
 
 Sky:
-  DataPath: source/data/
-  
   ImportantRace: {'24': 24, '29': 29, '31': 31, '34': 34, '45': 45, '54': 54, '70': 70}
   ValidRace: {'22': 22, '32': 32, '41': 41, '42': 42, '49': 49, '51': 51, '53': 53, '57': 57, '59': 59, '65': 65, '66': 66, '71': 71}
   CommonRace: {}

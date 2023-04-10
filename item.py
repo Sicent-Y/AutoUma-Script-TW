@@ -1,20 +1,11 @@
 import cv2
 import numpy as np
 import os
-data = "source/data/"
+import yaml
 
-def open(path):
-    img = cv2.imread(path)
-    if '.jpg' in path:
-        img_encode = cv2.imencode('.jpg', img)[1]
-    elif '.png' in path:
-        img_encode = cv2.imencode('.png', img)[1]
-    data_encode = np.array(img_encode)
-    str_encode = data_encode.tostring()
-    image = np.asarray(bytearray(str_encode), dtype=np.uint8)
-    image = cv2.imdecode(image, cv2.IMREAD_COLOR)
-    image = np.array(image).astype(np.float32)
-    return image
+with open("config.yaml","rb") as data:
+    config = yaml.load(data.read(), Loader=yaml.FullLoader)
+data = config['DataPath']
 
 class Item():
     #录入数字:i.Item.Num[i]与i.Item.NumS[i]
