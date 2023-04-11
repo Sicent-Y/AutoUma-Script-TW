@@ -206,7 +206,7 @@ def adbConnect(ip):
             print("!!!!!!!!!!!!没有可用的adb设备,请检查设备连接,确保至少存在一个可用设备!!!!!!!!!!!!")
             raise IndexError('None Devices Accessible.')
         else:
-            print("---存在多个设备,请选择你需要的设备---")
+            print("------存在多个设备,请选择你需要的设备------")
             option = []
             for d in range(len(Devices)):
                 print(d+1,':',Devices[d])
@@ -233,13 +233,13 @@ out, error = screen.communicate()
 byteImg = out.replace(b'\r\n', b'\n')
 array = np.asarray(bytearray(byteImg), dtype=np.uint8)
 Cap = cv2.imdecode(array, cv2.IMREAD_COLOR)
-def screenCap(sleepTime=250):
+def screenCap(sleepTime=0.1):
     """
     通过threading循环执行,以mat形式刷新Cap变量,可以设置刷新率
     """
     global Cap
     while CapON:
-        time.sleep(0.1)
+        time.sleep(sleepTime)
         screen = subprocess.Popen("adb -s "+IP+" shell screencap -p",shell=True,stdout=subprocess.PIPE)
         out, error = screen.communicate()
         byteImg = out.replace(b'\r\n', b'\n')
@@ -788,6 +788,8 @@ class Gap():
     #检查进入新回合前是否出现过论外界面
     Gapped = 0
     Comfirmed = 0
+    First = True
+    GameTimes = 0
     #该step执行完成后应该执行的step
     Next = 'Home'
 
@@ -827,9 +829,10 @@ class Gap():
             Gap.Gapped = True
             Dispatch.append('Gap.EventSelect')
             return False
-        elif Page=='Game':
+        elif Page=='Game' and Gap.First:##引入First
             print(time.strftime("%m-%d %H:%M:%S",time.localtime())+"[发生抓娃娃事件,该脚本不能识别目标,将进行随机抓取]")
             TimeOut.Latest = time.time()
+            Gap.First = False
             Gap.Gapped = True
             Dispatch.append('Gap.Game')
             Dispatch.append('Gap.Game')
@@ -873,11 +876,15 @@ class Gap():
     def Game():
         time.sleep(0.1)
         if Page=='Game':
+            Gap.GameTimes += 1
             Game = (540,2250)
             print(time.strftime("%m-%d %H:%M:%S",time.localtime())+"[进行随机抓取...]")
             TimeOut.Latest = time.time()
             os.system("adb -s "+IP+" shell input swipe "+str(Game[0])+' '+str(Game[1])+' '+str(Game[0]+1)+' '+str(Game[1])+' '+str(random.randint(1000,3000)))
             time.sleep(0.3)
+            if Gap.GameTimes==3:
+                Gap.First = True
+                Gap.GameTimes = 0
             return True
         else:
             time.sleep(0.3)
