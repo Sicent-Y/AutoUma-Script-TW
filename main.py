@@ -789,7 +789,6 @@ class Gap():
     Gapped = 0
     Comfirmed = 0
     First = True
-    GameTimes = 0
     #该step执行完成后应该执行的step
     Next = 'Home'
 
@@ -859,6 +858,7 @@ class Gap():
                 while Gap.Next not in 'Home,SummerHome,RaceHome':
                     time.sleep(0.1)
                     Gap.Next = Page
+                Gap.First = True
                 Gap.Complete = True
                 return True
             elif Gap.Gapped<2:
@@ -876,15 +876,11 @@ class Gap():
     def Game():
         time.sleep(0.1)
         if Page=='Game':
-            Gap.GameTimes += 1
             Game = (540,2250)
             print(time.strftime("%m-%d %H:%M:%S",time.localtime())+"[进行随机抓取...]")
             TimeOut.Latest = time.time()
             os.system("adb -s "+IP+" shell input swipe "+str(Game[0])+' '+str(Game[1])+' '+str(Game[0]+1)+' '+str(Game[1])+' '+str(random.randint(1000,3000)))
-            time.sleep(0.3)
-            if Gap.GameTimes==3:
-                Gap.First = True
-                Gap.GameTimes = 0
+            time.sleep(5)
             return True
         else:
             time.sleep(0.3)
