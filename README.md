@@ -61,7 +61,7 @@ python -m venv AutoUma
 pip install -r requirements.txt
 ```
 
-这可能需要一些时间，你可以使用国内镜像源，这样会快一些`pip install -r requiremnets.txt -i https://pypi.tuna.tsinghua.edu.cn/simple`
+这可能需要一些时间，你可以使用国内镜像源，这样会快一些`pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple`
 
 ### 配置adb
 
