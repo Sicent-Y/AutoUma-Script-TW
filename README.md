@@ -58,7 +58,7 @@ python -m venv AutoUma
 
 安装依赖
 ```
-pip install -r requiremnets.txt
+pip install -r requirements.txt
 ```
 
 这可能需要一些时间，你可以使用国内镜像源，这样会快一些`pip install -r requiremnets.txt -i https://pypi.tuna.tsinghua.edu.cn/simple`
